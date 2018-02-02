@@ -1,4 +1,5 @@
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
@@ -22,5 +23,11 @@ module.exports = {
         filename: 'transformed.js',
         path: __dirname+ '/build'
     },
-    plugins : [HTMLWebpackPluginConfig]
+    plugins : [
+        HTMLWebpackPluginConfig, 
+        new UglifyJsPlugin({
+            test: /\.js($|\?)/i,
+            sourceMap: true
+        })
+    ]
 };
